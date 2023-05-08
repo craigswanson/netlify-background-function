@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-exports.handler = async (event, context) => {
+exports.handler = async function (event, context, callback) {
   if (!configuration.apiKey) {
     return {
       statusCode: 500,
@@ -21,13 +21,14 @@ exports.handler = async (event, context) => {
   const data = JSON.parse(event.body);
   const animal = data.animal || '';
   if (animal.trim().length === 0) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        error: {
-          message: "Please enter a valid animal",
-        }
-      }),
+callback(null, {
+  statusCode: 400,
+  body: JSON.stringify({
+    error: {
+      message: "Please enter a valid animal",
+    }
+  }),
+});
     };
   }
 
