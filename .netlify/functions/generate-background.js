@@ -8,7 +8,7 @@ const openai = new OpenAIApi(configuration);
 
 exports.handler = async function (event, context, callback) {
   if (!configuration.apiKey) {
-    return {
+    callback(null, {
       statusCode: 500,
       body: JSON.stringify({
         error: {
