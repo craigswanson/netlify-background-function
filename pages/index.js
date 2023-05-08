@@ -9,7 +9,7 @@ export default function Home() {
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch("/api/generate", {
+      const response = await fetch("/.netlify/functions/generator-background", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
